@@ -1,13 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { BrowserRouter, Routes, Redirect, Route } from "react-router-dom";
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import ThemeProvider from "./contexts/ThemeProvider";
+import PageEx from "views/guest/PageEx";
+
+
+//routes
+import { pageExRoute } from "routes";
+console.log("🚀 ~ pageExRoute:", pageExRoute)
+
+const Router = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+      {/* <Route path="/pageEx" element={<PageEx />} /> */}
+        {pageExRoute.map((route, index) => (<Route key={index} path={route.path} element={route.element} />))}
+      </Routes>
+    </BrowserRouter>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider>
+      <Router />
+    </ThemeProvider>
   </React.StrictMode>
 );
 
