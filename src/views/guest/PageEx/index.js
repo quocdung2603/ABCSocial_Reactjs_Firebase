@@ -15,6 +15,7 @@ export default function PageEx() {
             await setDoc(doc(db,"users","1"),{
                 name: "Kiệt Lê",
                 age: "20",
+                b:"à",
             })
         } catch (error) {
             alert("Lỗi mẹ rồi");
