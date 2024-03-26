@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ThemeContext } from "contexts/ThemeProvider";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../../firebase";
+import { db } from "../../../database/firebase-config";
 import { Button } from "antd";
 
 
