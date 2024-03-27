@@ -9,7 +9,7 @@ import PageEx from "views/guest/PageEx";
 
 
 //routes
-import { pageExRoute } from "routes";
+import { pageExRoute, GroupRoute } from "routes";
 console.log("🚀 ~ pageExRoute:", pageExRoute)
 
 const Router = () => {
@@ -18,6 +18,7 @@ const Router = () => {
       <Routes>
       {/* <Route path="/pageEx" element={<PageEx />} /> */}
         {pageExRoute.map((route, index) => (<Route key={index} path={route.path} element={route.element} />))}
+        {GroupRoute.map((route, index) => (<Route key={index} path={route.path} element={route.element} />))}
       </Routes>
     </BrowserRouter>
   );
