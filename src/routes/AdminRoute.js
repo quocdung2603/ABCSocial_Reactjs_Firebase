@@ -1,7 +1,8 @@
 import Index from "views/admin";
 export const AdminRoute = [
   {
-    path: "/administration",
+    path: "/",
+    layout: "/administration", // "/administration
     element: <Index />,
   },
 ];

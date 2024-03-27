@@ -1,29 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { BrowserRouter, Routes, Redirect, Route } from "react-router-dom";
+import { BrowserRouter, Routes } from "react-router-dom";
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import reportWebVitals from "./reportWebVitals";
 
 import ThemeProvider from "./contexts/ThemeProvider";
-import PageEx from "views/guest/PageEx";
-
 
 //routes
-import { pageExRoute, GroupRoute, AdminRoute } from "routes";
-console.log("🚀 ~ pageExRoute:", pageExRoute)
-
+import { layoutRoute } from "routes/layoutRoute";
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-      {/* <Route path="/pageEx" element={<PageEx />} /> */}
-        {pageExRoute.map((route, index) => (<Route key={index} path={route.path} element={route.element} />))}
-        {GroupRoute.map((route, index) => (<Route key={index} path={route.path} element={route.element} />))}
-        {AdminRoute.map((route, index) => (<Route key={index} path={route.path} element={route.element} />))}
+        {layoutRoute.map((route, index) => (
+          <Route key={index} path={route.path} element={route.element} />
+        ))}
       </Routes>
     </BrowserRouter>
   );
-}
+};
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
