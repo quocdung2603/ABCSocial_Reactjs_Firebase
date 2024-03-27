@@ -10,15 +10,18 @@ import PageEx from "views/guest/PageEx";
 
 //routes
 import { pageExRoute, GroupRoute } from "routes";
+import { Account } from "routes";
+import AuthContextProvider  from "contexts/AuthContext";
 console.log("🚀 ~ pageExRoute:", pageExRoute)
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-      {/* <Route path="/pageEx" element={<PageEx />} /> */}
+        {/* <Route path="/pageEx" element={<PageEx />} /> */}
         {pageExRoute.map((route, index) => (<Route key={index} path={route.path} element={route.element} />))}
         {GroupRoute.map((route, index) => (<Route key={index} path={route.path} element={route.element} />))}
+        {Account.map((route, index) => (<Route key={index} path={route.path} element={route.element} />))}
       </Routes>
     </BrowserRouter>
   );
@@ -27,7 +30,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ThemeProvider>
-      <Router />
+      <AuthContextProvider>
+
+        <Router />
+      </AuthContextProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

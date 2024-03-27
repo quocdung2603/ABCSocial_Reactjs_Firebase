@@ -1,30 +1,26 @@
 import { useContext } from "react";
 import { ThemeContext } from "contexts/ThemeProvider";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../../database/firebase-config";
+import { auth, db } from "../../../database/firebase-config";
 import { Button } from "antd";
+import { AuthContext } from "contexts/AuthContext";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 
 
 
 export default function PageEx() {
-
+    const {currentUser}=useContext(AuthContext);
+    console.log(currentUser);
+    const navigate = useNavigate();
     const { COLORS, SIZES, FONTS } = useContext(ThemeContext);
     const handleTest= async ()=>{
-        try {
-            await setDoc(doc(db,"users","1"),{
-                name: "Kiệt Lê",
-                age: "20",
-                b:"à",
-            })
-        } catch (error) {
-            alert("Lỗi mẹ rồi");
-            console.log(error);
-        }
-        
+        signOut(auth);
+        navigate("/Account/login");
     }
     return <div className=" text-center">
-        Hello world
+        {currentUser.email}
         <Button onClick={handleTest}>Test</Button>
     </div>
 }
