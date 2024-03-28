@@ -1,5 +1,7 @@
+import { db } from "database/firebase-config";
 import { auth } from "database/firebase-config";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -11,8 +13,18 @@ function Login() {
         const email= e.target[0].value;
         const password= e.target[1].value;
         try {
-            await signInWithEmailAndPassword(auth,email,password);
-            navigate("/pageEx")
+            const q = query(collection(db,"users"), where("email","==",email));
+            const getUser=await getDocs(q);
+            const user=getUser.docs[0];
+            if(user.data().disable===false)
+            {
+                await signInWithEmailAndPassword(auth,email,password);
+                navigate("/pageEx")
+            }
+            else
+            {
+                setErr(true);
+            }
         } catch (error) {
             setErr(true)
         }

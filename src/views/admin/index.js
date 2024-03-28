@@ -11,7 +11,10 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 import { Input, Menu, Result } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import Users from "./Users";
+import Accounts  from "./Accounts";
+import Posts from "./Posts";
 
 // import DetailNews from "../components/detailAdmin_News";
 // import DetailProblem from "../components/detailAdmin_Problem";
@@ -21,9 +24,9 @@ export default function Index() {
   //   const user = localStorage.getItem("dataUser")
   //     ? JSON.parse(localStorage.getItem("dataUser"))
   //     : null;
+  const {keyP} = useParams();
   const user = { username: "admin", role: "admin" };
-
-  const [key, setKey] = useState("");
+  const [key, setKey] = useState(keyP);
 
   function getItem(label, key, icon, children, type) {
     return {
@@ -34,7 +37,7 @@ export default function Index() {
       type,
     };
   }
-  const items = [
+const items = [
     getItem(
       <span className="uppercase font-medium text-base">Thông báo</span>,
       "notifications",
@@ -118,33 +121,33 @@ export default function Index() {
             <div className="fixed hidden z-20 h-full top-0 left-0 pt-16 lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75">
               <Menu mode="inline" items={items} onClick={onClick} />
             </div>
-            {/* {key === "news" && (
+            {key === "users" && (
               <div className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
                 <div className="py-6 px-4">
                   <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 2xl:col-span-2">
-                    <DetailNews />
+                    <Users />
                   </div>
                 </div>
               </div>
             )}
-            {key === "problem" && (
+            {key === "accounts" && (
               <div className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
                 <div className="py-6 px-4">
                   <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 2xl:col-span-2">
-                    <DetailProblem />
+                    <Accounts/>
                   </div>
                 </div>
               </div>
             )}
-            {key === "contest" && (
+            {key === "posts" && (
               <div className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
                 <div className="py-6 px-4">
                   <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 2xl:col-span-2">
-                    <DetailContest />
+                    <Posts/>
                   </div>
                 </div>
               </div>
-            )} */}
+            )}
           </div>
         </div>
       ) : (

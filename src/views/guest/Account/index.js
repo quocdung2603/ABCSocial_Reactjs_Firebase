@@ -1,6 +1,6 @@
 import { auth, db, storage } from "../../../database/firebase-config";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { collection, doc, getDocs, limit, orderBy, query, setDoc } from "firebase/firestore";
+import { Timestamp, collection, doc, getDocs, limit, orderBy, query, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ function Index() {
         const password = e.target[2].value;
         const file = e.target[3].files[0];
         try {
-            const q = query(collection(db, "users"), orderBy("userNumber", "desc"), limit(1));
+            const q = query(collection(db, "account"), orderBy("userNumber", "desc"), limit(1));
             const querySnapshot = await getDocs(q);
             let id = 1;
             let userNumber = 1;
@@ -29,6 +29,7 @@ function Index() {
             console.log(res);
             const date = Date.now();
             const storageRef = ref(storage, `AvatarUser/${id+ displayName + date}`);
+            const time=Timestamp.now();
             await uploadBytesResumable(storageRef, file).then(() => {
                 getDownloadURL(storageRef).then(async (downloadURL) => {
                     try {
@@ -42,7 +43,17 @@ function Index() {
                             email: email,
                             password: password,
                             avatar: downloadURL,
-                            userNumber: userNumber
+                            state: true,
+                            coverImage: null,
+                            dateCreate: time,
+                            phoneNumber: null,
+                            birthDay: null,
+                            made: null,
+                            address: null,
+                            identifier: null,
+                            userNumber: userNumber,
+                            uid: res.user.uid,
+                            disable: false
                         })
                         navigate("/pageEx")
                     } catch (err) {

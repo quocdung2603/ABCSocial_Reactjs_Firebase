@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import LayoutGuest from "layouts/guest";
 import Index from "views/admin";
 import { pageExRoute, GroupRoute, fanpageRoute, Account} from "routes";
+
 export const layoutRoute = [
   {
     path: "/administration",
