@@ -41,8 +41,7 @@ export default function LayoutGuest({ children }) {
   return (
     <Layout>
       <CustomHeader />
-      <Link to={"abc"}>SAFJ</Link>
-      <Content id="content" style={{ width: "70%", margin: "0 auto" }}>
+      <Content id="content" style={{ width: "100%", margin: "0 auto" }}>
         {children}
       </Content>
 
